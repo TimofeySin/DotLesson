@@ -50,9 +50,13 @@ public class SimpleCircle {
             result = curcircle.radius + circle.radius >= Math.sqrt(Math.pow(curcircle.x - circle.x, 2) + Math.pow(curcircle.y - circle.y, 2));
             if ((result) && (curcircle != circle)){
                 return curcircle;
-                
+
             }
         }
         return circle;
+    }
+
+    public boolean isSmallerThan(SimpleCircle collCircle) {
+        return radius<collCircle.radius;
     }
 }

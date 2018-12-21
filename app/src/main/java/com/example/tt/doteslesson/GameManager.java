@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class GameManager {
     public static final int MAX_CIRCLE = 10;
+
     private MainCircle mainCircle;
     private ArrayList<EnemyCircle> circles;
     private CanvasView canvasView;
@@ -29,7 +30,7 @@ public class GameManager {
                 circle = (EnemyCircle) EnemyCircle.getRandomCircles();
                 mainEnemyCircleArea = circle.getCircleArea();
             }
-            while (circle.isIntersect(mainCircleArea) == true ||   !mainEnemyCircleArea.equals(circle.isIntersect(circles, mainEnemyCircleArea)));
+            while (circle.isIntersect(mainCircleArea) == true || !mainEnemyCircleArea.equals(circle.isIntersect(circles, mainEnemyCircleArea)));
             circles.add(circle);
         }
         calculateAndSetCirclesColor();
@@ -68,8 +69,28 @@ public class GameManager {
     }
 
     private void checkCollision() {
-        if ( !mainCircle.equals(mainCircle.isIntersect(circles, mainCircle))) {
-            gameEnd();
+        SimpleCircle collCircle;
+        SimpleCircle ciclefordel = null;
+        collCircle = mainCircle.isIntersect(circles, mainCircle);
+
+        if (!mainCircle.equals(collCircle)) {
+            if (mainCircle.isSmallerThan(collCircle)) {
+                gameEnd();
+                return;
+            } else {
+                mainCircle.growRadius(collCircle);
+                calculateAndSetCirclesColor();
+                ciclefordel = collCircle;
+
+            }
+
+            if (ciclefordel != null) {
+                circles.remove(ciclefordel);
+            }
+            if (circles.isEmpty()) {
+                gameEnd();
+            }
+
         }
     }
 
@@ -83,7 +104,7 @@ public class GameManager {
         for (EnemyCircle circle : circles) {
 
             circle.moveOneStep();
-            if ( !circle.equals(mainCircle.isIntersect(circles,circle))) {
+            if (!circle.equals(mainCircle.isIntersect(circles, circle))) {
                 circle.changeMove();
             }
         }
