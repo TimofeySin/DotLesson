@@ -66,4 +66,9 @@ public class EnemyCircle extends SimpleCircle {
             dy = -dy;
         }
     }
+
+    public void changeMove() {
+        dx = -dx;
+        dy = -dy;
+    }
 }
