@@ -72,7 +72,7 @@ public class CanvasView extends View implements ICanvasView {
         } else {
             text = "Game fall";
         }
-        toast = Toast.makeText(getContext(), text, Toast.LENGTH_LONG);
+        toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
         toast.show();
     }
 
