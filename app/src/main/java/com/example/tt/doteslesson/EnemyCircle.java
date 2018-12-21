@@ -23,12 +23,13 @@ public class EnemyCircle extends SimpleCircle {
 
     public static Object getRandomCircles() {
         Random random = new Random();
-        int x = random.nextInt(GameManager.getWidth());
-        int y = random.nextInt(GameManager.getHeight());
-        int dx = 1+random.nextInt( MAX_SPEED);
-        int dy = 1+random.nextInt( MAX_SPEED);
+
+        int dx = 1 + random.nextInt(MAX_SPEED);
+        int dy = 1 + random.nextInt(MAX_SPEED);
         int radius = FROM_RADIUS + random.nextInt(TO_RADIUS - FROM_RADIUS);
-        EnemyCircle enemyCircle = new EnemyCircle(x, y, radius, dx ,dy);
+        int x = radius + random.nextInt(GameManager.getWidth() - (radius * 2));
+        int y = radius + random.nextInt(GameManager.getHeight() - (radius * 2));
+        EnemyCircle enemyCircle = new EnemyCircle(x, y, radius, dx, dy);
 
         return enemyCircle;
     }
@@ -54,5 +55,15 @@ public class EnemyCircle extends SimpleCircle {
     public void moveOneStep() {
         x += dx;
         y += dy;
+        checkBounds();
+    }
+
+    private void checkBounds() {
+        if (x + radius > GameManager.getWidth() || x - radius < 0) {
+            dx = -dx;
+        }
+        if (y + radius > GameManager.getHeight() || y - radius < 0) {
+            dy = -dy;
+        }
     }
 }
