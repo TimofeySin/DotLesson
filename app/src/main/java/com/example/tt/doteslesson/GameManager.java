@@ -29,7 +29,7 @@ public class GameManager {
                 circle = (EnemyCircle) EnemyCircle.getRandomCircles();
                 mainEnemyCircleArea = circle.getCircleArea();
             }
-            while (circle.isIntersect(mainCircleArea) == true || circle.isIntersect(circles, mainEnemyCircleArea) != mainEnemyCircleArea);
+            while (circle.isIntersect(mainCircleArea) == true ||   mainEnemyCircleArea.equals(circle.isIntersect(circles, mainEnemyCircleArea)));
             circles.add(circle);
         }
         calculateAndSetCirclesColor();
@@ -68,7 +68,7 @@ public class GameManager {
     }
 
     private void checkCollision() {
-        if (mainCircle.isIntersect(circles, mainCircle) != mainCircle) {
+        if ( mainCircle.equals(mainCircle.isIntersect(circles, mainCircle))) {
             gameEnd();
         }
     }
@@ -83,7 +83,7 @@ public class GameManager {
         for (EnemyCircle circle : circles) {
 
             circle.moveOneStep();
-            if (mainCircle.isIntersect(circles,circle) != circle) {
+            if ( circle.equals(mainCircle.isIntersect(circles,circle))) {
                 circle.changeMove();
             }
         }
