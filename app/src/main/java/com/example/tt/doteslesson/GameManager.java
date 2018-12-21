@@ -75,7 +75,7 @@ public class GameManager {
 
         if (!mainCircle.equals(collCircle)) {
             if (mainCircle.isSmallerThan(collCircle)) {
-                gameEnd();
+                gameEnd(false);
                 return;
             } else {
                 mainCircle.growRadius(collCircle);
@@ -88,13 +88,17 @@ public class GameManager {
                 circles.remove(ciclefordel);
             }
             if (circles.isEmpty()) {
-                gameEnd();
+                gameEnd(true);
             }
 
         }
     }
 
-    private void gameEnd() {
+    private void gameEnd(boolean b) {
+
+
+        canvasView.showMessage(b);
+
         mainCircle.initRadius();
         initEnemyCircles();
         canvasView.redraw();
